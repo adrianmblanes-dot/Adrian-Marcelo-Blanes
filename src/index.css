@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  
+  --color-mystic-black: #050507;
+  --color-mystic-gold: #d4af37;
+  --color-mystic-indigo: #0d0d1a;
+  --color-mystic-crimson: #2a0202;
+}
+
+@keyframes mystic-glow {
+  0%, 100% { filter: drop-shadow(0 0 5px currentColor); opacity: 0.8; }
+  50% { filter: drop-shadow(0 0 15px currentColor); opacity: 1; }
+}
+
+@keyframes stars-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.animate-mystic-glow {
+  animation: mystic-glow 3s ease-in-out infinite;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: stars-twinkle var(--duration, 3s) infinite ease-in-out;
+  animation-delay: var(--delay, 0s);
+}
+
+body {
+  background-color: var(--color-mystic-black);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(13, 13, 26, 0.8) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(42, 2, 2, 0.3) 0%, transparent 40%),
+    linear-gradient(to bottom, #050507, #0d0d1a);
+  color: #e2e2e2;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+}
