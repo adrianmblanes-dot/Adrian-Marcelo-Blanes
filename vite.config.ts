@@ -14,6 +14,8 @@ export default defineConfig(({mode}) => {
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(apiKey),
+      // Esta es la línea clave que le da soporte directo al navegador en producción
+      '__GEMINI_API_KEY__': JSON.stringify(apiKey),
     },
     resolve: {
       alias: {
