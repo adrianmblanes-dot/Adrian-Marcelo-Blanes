@@ -5,11 +5,15 @@ import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
+  
+  // Aquí está el truco: si process.env tiene la clave de GitHub, usa esa. Si no, usa la local.
+  const apiKey = process.env.GEMINI_API_KEY || env.GEMINI_API_KEY || '';
+
   return {
     base: '/Adrian-Marcelo-Blanes/',
     plugins: [react(), tailwindcss()],
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(apiKey),
     },
     resolve: {
       alias: {
