@@ -56,8 +56,14 @@ export default function App() {
 
       setInterpretation(result);
     } catch (err: any) {
-      // Rompemos el filtro: ahora la pantalla te dirá el error real del servicio
-      setError(err?.message || 'Las estrellas están nubladas hoy. Intenta de nuevo en un momento.');
+      console.error("Error capturado en la consulta:", err);
+      
+      // Manejo inteligente de errores: si es por límite de cuota (429), muestra un mensaje místico adaptado
+      if (err?.message?.includes('429') || err?.message?.includes('quota')) {
+        setError('El flujo cósmico está muy transitado en este momento. Las estrellas necesitan un breve respiro; por favor, aguarda unos segundos e intenta nuevamente.');
+      } else {
+        setError(err?.message || 'Las estrellas están nubladas hoy. Intenta de nuevo en un momento.');
+      }
     } finally {
       setLoading(false);
     }
@@ -151,7 +157,6 @@ export default function App() {
     
     // Check for page overflow
     if (y + (splitInterpretation.length * 6) > doc.internal.pageSize.getHeight() - 50) {
-        // Simple page management
         let linesOnFirstPage = Math.floor((doc.internal.pageSize.getHeight() - 50 - y) / 6);
         doc.text(splitInterpretation.slice(0, linesOnFirstPage), margin, y);
         doc.addPage();
@@ -163,14 +168,14 @@ export default function App() {
         y += (splitInterpretation.length * 6) + 20;
     }
 
-    // Footer Message
+    // Footer Message (Espacios corregidos para legibilidad comercial)
     const footerY = doc.internal.pageSize.getHeight() - 35;
     doc.setDrawColor(212, 175, 55);
     doc.line(margin, footerY - 5, pageWidth - margin, footerY - 5);
     
     doc.setTextColor(100, 100, 100);
     doc.setFontSize(9);
-    const footerText = "Retoma la pregunta si es relevante en 7 dias aproximadamente y complemente esta respuesta con el Tarot de Adriano comunicate sin compromiso al whatsapp +542617116896 y descubre lo que el tarot tiene que revelarte";
+    const footerText = "Retoma la pregunta si es relevante en 7 días aproximadamente y complementa esta respuesta con el Tarot de Adriano. Comunícate sin compromiso al WhatsApp +54 261 711 6896 y descubre lo que el tarot tiene que revelarte.";
     const splitFooter = doc.splitTextToSize(footerText, contentWidth);
     doc.text(splitFooter, margin, footerY);
 
