@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Busca la clave inyectada en el objeto window de la web, y si no, usa un string vacío
-const apiKey = (window as any).VITE_GEMINI_API_KEY || "";
+// Lectura oficial de Vite para producción en GitHub Pages
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -31,7 +31,7 @@ Tono: Sabio, certero, místico y empoderador. No uses introducciones genéricas 
 
   try {
     if (!apiKey) {
-      throw new Error("La clave API de Gemini no está disponible en el navegador.");
+      throw new Error("La clave API de Gemini (VITE_GEMINI_API_KEY) no está disponible.");
     }
     const result = await model.generateContent(prompt);
     return result.response.text();
