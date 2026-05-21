@@ -55,8 +55,9 @@ export default function App() {
       }
 
       setInterpretation(result);
-    } catch (err) {
-      setError('Las estrellas están nubladas hoy. Intenta de nuevo en un momento.');
+    } catch (err: any) {
+      // Rompemos el filtro: ahora la pantalla te dirá el error real del servicio
+      setError(err?.message || 'Las estrellas están nubladas hoy. Intenta de nuevo en un momento.');
     } finally {
       setLoading(false);
     }
@@ -511,4 +512,3 @@ export default function App() {
     </div>
   );
 }
-
