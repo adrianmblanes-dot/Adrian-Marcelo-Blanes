@@ -35,8 +35,8 @@ Tono: Sabio, certero, místico y empoderador. No uses introducciones genéricas 
     }
     const result = await model.generateContent(prompt);
     return result.response.text();
-  } catch (error) {
+ } catch (error: any) {
     console.error("Error generating interpretation:", error);
-    throw new Error("No se pudo generar la interpretación. Intenta nuevamente.");
+    throw new Error(`Detalle astral: ${error?.message || error || 'Error desconocido'}`);
   }
 }
