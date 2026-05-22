@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Adaptado para leer tu Secreto de GitHub exacto sin el prefijo VITE_
-const apiKey = import.meta.env.GEMINI_API_KEY || "";
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -31,7 +30,7 @@ Tono: Sabio, certero, místico y empoderador. No uses introducciones genéricas 
 
   try {
     if (!apiKey) {
-      throw new Error("La clave API de Gemini (GEMINI_API_KEY) no está disponible.");
+      throw new Error("La clave API de Gemini (VITE_GEMINI_API_KEY) no está disponible.");
     }
     const result = await model.generateContent(prompt);
     return result.response.text();
