@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Dice5, History, Info, ChevronRight, Wand2, Download, Dices, Eye, Sparkle } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import { PLANETS, SIGNS, HOUSES } from './constants';
-import { interpretDice } from './services/geminiService';
+// REPARADO: Ruta corregida directo a la raíz de src donde está tu archivo real
+import { interpretDice } from './geminiService';
 import PlanetOrbits from './components/PlanetOrbits';
 import StarsBackground from './components/StarsBackground';
 import FloatingDecoration from './components/FloatingDecoration';
@@ -58,7 +59,7 @@ export default function App() {
     } catch (err: any) {
       console.error("Error capturado en la consulta:", err);
       
-      // Manejo inteligente de errores: si es por límite de cuota (429), muestra un mensaje místico adaptado
+      // Manejo inteligente de errores místico
       if (err?.message?.includes('429') || err?.message?.includes('quota')) {
         setError('El flujo cósmico está muy transitado en este momento. Las estrellas necesitan un breve respiro; por favor, aguarda unos segundos e intenta nuevamente.');
       } else {
